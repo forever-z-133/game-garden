@@ -1,16 +1,16 @@
 /**
  * 素材加载器
  */
-class SourceLoader {
-  config: SourcesConfig = {};
-}
-export default SourceLoader;
-
 export interface SourcesConfig {
-  images?: ImageSourceConfig[];
+  images: ImageSourceConfig[];
   audios?: any[];
 }
 export interface ImageSourceConfig {
+  id: 'background' | 'puzzle-source';
   src: string;
   desc?: string;
+}
+export interface LoadedImageData extends ImageSourceConfig {
+  width: number;
+  height: number;
 }

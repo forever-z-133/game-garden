@@ -10,6 +10,9 @@ class ImageSprite extends Sprite {
   clipY: number = 0;
   clipWidth: number = 0;
   clipHeight: number = 0;
+  get src(): string {
+    return this.source.src;
+  }
   get width(): number {
     return this.source.width;
   }
@@ -17,7 +20,7 @@ class ImageSprite extends Sprite {
     return this.source.height;
   }
 
-  constructor(src: string, width: number, height: number, clipX: number = 0, clipY: number = 0, clipWidth: number = width, clipHeight: number = height) {
+  constructor(src: string, width: number, height: number, clipX = 0, clipY = 0, clipWidth = width, clipHeight = height) {
     super();
     this.source = new ImageOM(src, width, height);
     this.clipX = clipX;

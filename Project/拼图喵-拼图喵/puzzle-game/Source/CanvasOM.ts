@@ -2,8 +2,14 @@
  * canvas 元素
  */
 class CanvasOM {
-  id: string = '';
-  dom: any = null;
-  ctx: any = null;
+  ctx: UniApp.CanvasContext = null;
+  width: number = 0;
+  height: number = 0;
+
+  constructor(ctx: UniApp.CanvasContext, width: number, height: number) {
+    this.ctx = ctx;
+    this.width = width;
+    this.height = height;
+  }
 }
 export default CanvasOM;
