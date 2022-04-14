@@ -1,5 +1,11 @@
 import Drawer from "./Drawer";
 
+// #ifdef MP-WEIXIN
+const requestAnimationFrame = (func: Function) => {
+  setTimeout(func, 1000 / 60);
+}
+// #endif
+
 /**
  * 游戏运行管理器
  */

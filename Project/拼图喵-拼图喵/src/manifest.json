@@ -1,7 +1,7 @@
 {
-    "name" : "",
-    "appid" : "",
-    "description" : "",
+    "name" : "拼图喵",
+    "appid" : "wxe342ece1e3a8d948",
+    "description" : "拼图游戏",
     "versionName" : "1.0.0",
     "versionCode" : "100",
     "transformPx" : false,
@@ -42,7 +42,7 @@
     },
     "quickapp" : {},
     "mp-weixin" : {
-        "appid" : "",
+        "appid" : "wxe342ece1e3a8d948",
         "setting" : {
             "urlCheck" : false
         },

@@ -2,7 +2,7 @@
   <div class="game-container">
     <canvas
       class="canvas game-canvas"
-      :style="{width: '500px', height: '500px'}"
+      :style="{width: `${canvasWidth}px`, height: `${canvasHeight}px`}"
       canvas-id="gameCanvas"
       id="gameCanvas"
     />
@@ -28,8 +28,8 @@ const systemInfo = uni.getSystemInfoSync();
 const { windowWidth, windowHeight } = systemInfo;
 
 let ctx: UniApp.CanvasContext | null = null;
-const canvasWidth = 500;
-const canvasHeight = 500;
+const canvasWidth = windowWidth;
+const canvasHeight = windowHeight;
 
 const game: Game = new Game({
   windowWidth,

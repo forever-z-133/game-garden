@@ -1,8 +1,8 @@
-import { LoadedImageData } from "../Base/SourceLoader";
-import Game from "../Game";
-import ImageSprite from "../Source/ImageSprite";
-import { getScaleData, ScaleData } from "../utils/scaleUtil";
-import BaseElement from "./BaseElement";
+import { LoadedImageData } from "../../Base/SourceLoader";
+import Game from "../../Game";
+import ImageSprite from "../../Source/ImageSprite";
+import { getScaleData, ScaleData } from "../../utils/scaleUtil";
+import BaseElement from "../BaseElement";
 
 /**
  * 拼图面板背景
@@ -22,7 +22,7 @@ class StageBackground implements BaseElement {
 
     this.sources.push(sprite);
   }
-  
+
   update(now: number): void {}
 
   draw(ctx: UniApp.CanvasContext): void {

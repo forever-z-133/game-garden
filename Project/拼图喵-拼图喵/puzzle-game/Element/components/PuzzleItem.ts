@@ -1,5 +1,5 @@
-import ImageSprite from "../Source/ImageSprite";
-import BaseElement from "./BaseElement";
+import ImageSprite from "../../Source/ImageSprite";
+import BaseElement from "../BaseElement";
 
 /**
  * 单片拼图
@@ -28,16 +28,16 @@ class PuzzleItem implements BaseElement {
   update(now: number): void {}
 
   draw(ctx: UniApp.CanvasContext): void {
-    const { id, x, y, width, height } = this;
-    const { src, clipX, clipY, clipWidth, clipHeight } = this.image;
-    // const pattern = ctx.createPattern(src, 'no-repeat')
-    // ctx.fillStyle = pattern as unknown as string;
-    // ctx.fillRect(x - 50, y - 50, 200, 200);
-    ctx.drawImage(src, x, y, clipWidth, clipHeight);
+    const { x: offsetX, y: offsetY, width: offsetWidth, height: offsetHeight } = this;
+    const { src, width: imageWidth, height: imageHeight, clipX, clipY, clipWidth, clipHeight } = this.image;
+    const x = offsetX + clipX;
+    const y = offsetY + clipY;
+    ctx.drawImage(src, 0, 0, imageWidth, imageHeight, x, y, clipWidth, clipHeight);
     if (this.chosen) {
+      const borderWidth = 10;
       ctx.setStrokeStyle('red');
-      ctx.setLineWidth(10);
-      ctx.strokeRect(x + 5, y + 5, width - 10, height - 10);
+      ctx.setLineWidth(borderWidth);
+      ctx.strokeRect(offsetX + 5, offsetY + 5, offsetWidth - 10, offsetHeight - 10);
     }
   }
 }
