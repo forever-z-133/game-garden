@@ -2,7 +2,7 @@
  * canvas 元素
  */
 class CanvasOM {
-  ctx: UniApp.CanvasContext = null;
+  ctx: UniApp.CanvasContext;
   width: number = 0;
   height: number = 0;
 

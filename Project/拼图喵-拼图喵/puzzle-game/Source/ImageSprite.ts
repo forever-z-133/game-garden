@@ -5,7 +5,7 @@ import ImageOM from './ImageOM';
  * 图片素材
  */
 class ImageSprite extends Sprite {
-  source: ImageOM = null;
+  source: ImageOM;
   clipX: number = 0;
   clipY: number = 0;
   clipWidth: number = 0;

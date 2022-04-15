@@ -1,7 +1,7 @@
 import { LoadedImageData } from "../../Base/SourceLoader";
 import Game from "../../Game";
 import ImageSprite from "../../Source/ImageSprite";
-import { divideRect } from "../../utils/positionUtil";
+import { DivideRect, divideRect } from "../../utils/positionUtil";
 import { getScaleData, ScaleData } from "../../utils/scaleUtil";
 import BaseElement from "../BaseElement";
 import PuzzleItem from "./PuzzleItem";
@@ -10,7 +10,7 @@ import PuzzleItem from "./PuzzleItem";
  * 拼图中间的目标大格子
  */
 class PuzzleContainer implements BaseElement {
-  game: Game = null;
+  game: Game;
   x: number = 0;
   y: number = 0;
   width: number = 0;
@@ -36,7 +36,7 @@ class PuzzleContainer implements BaseElement {
     const scaleData: ScaleData = getScaleData(imageWidth, imageHeight, puzzleWidth, puzzleHeight, 'cover');
     const { width: compressWidth, height: compressHeight } = scaleData;
 
-    const rects = divideRect(rowCount, colCount, puzzleWidth, puzzleHeight);
+    const rects: DivideRect[] = divideRect(rowCount, colCount, puzzleWidth, puzzleHeight);
     rects.forEach(rect => {
       const { row, col, x: itemX, y: itemY, width: itemWidth, height: itemHeight } = rect;
 

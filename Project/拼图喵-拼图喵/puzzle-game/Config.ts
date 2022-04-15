@@ -10,7 +10,6 @@ export interface GameConfig {
   initialized: boolean;
   pause: boolean;
 }
-
 class Config implements GameConfig {
   fps: number = 60;
   windowWidth: number = 0;
@@ -22,11 +21,12 @@ class Config implements GameConfig {
 
   constructor(config: Partial<GameConfig> = {}) {
     Object.keys(config).forEach(key => {
-      this[key] = config[key];
+      this.set(key as any, (config as any)[key]);
     });
   }
-  set(key: keyof GameConfig, value: any) {
-    this[key as string] = value;
+
+  set: classSet<GameConfig> = (key, value) => {
+    (this as GameConfig)[key] = value;
   }
 }
 export default Config;

@@ -8,7 +8,6 @@ import BaseElement from "../BaseElement";
  * 拼图面板背景
  */
 class StageBackground implements BaseElement {
-  game: Game = null;
   sources: ImageSprite[] = [];
 
   constructor(game: Game, image: LoadedImageData) {

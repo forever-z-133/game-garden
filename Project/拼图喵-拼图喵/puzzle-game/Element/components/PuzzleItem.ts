@@ -6,7 +6,7 @@ import BaseElement from "../BaseElement";
  */
 class PuzzleItem implements BaseElement {
   id: string = '';
-  image: ImageSprite = null;
+  image: ImageSprite;
   x: number = 0;
   y: number = 0;
   width: number = 0;

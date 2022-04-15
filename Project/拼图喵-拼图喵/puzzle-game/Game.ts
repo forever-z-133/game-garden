@@ -13,12 +13,12 @@ import PuzzleContainer from "./Element/components/PuzzleContainer";
  * 游戏主程序
  */
 class Game {
-  config: Config = null;
-  data: GameData = null;
-  timer: Updater = null;
-  drawer: Drawer = null;
-  canvas: CanvasOM = null;
-  stage: Stage = null;
+  config: Config;
+  data!: GameData;
+  timer: Updater;
+  drawer: Drawer;
+  canvas!: CanvasOM;
+  stage!: Stage;
 
   constructor(config: Partial<GameConfig> = {}) {
     this.config = new Config(config);
@@ -26,15 +26,15 @@ class Game {
     this.timer = new Updater(this.drawer);
   }
 
-  prepare(ctx: UniApp.CanvasContext, sources?: SourcesConfig, options?: Partial<GameDataConfig>) {
+  prepare(ctx: UniApp.CanvasContext, sources: SourcesConfig, options?: Partial<GameDataConfig>) {
     const { canvasWidth, canvasHeight } = this.config;
     this.canvas = new CanvasOM(ctx as any, canvasWidth, canvasHeight);
 
     this.data = new GameData(options);
 
     const images = sources.images as LoadedImageData[];
-    const backgroundImage = images.find(e => e.id === 'background');
-    const sourceImage = images.find(e => e.id === 'puzzle-source');
+    const backgroundImage = images.find(e => e.id === 'background') as LoadedImageData;
+    const sourceImage = images.find(e => e.id === 'puzzle-source') as LoadedImageData;
 
     const background: StageBackground = new StageBackground(this, backgroundImage);
     const container: PuzzleContainer = new PuzzleContainer(this);
@@ -62,9 +62,6 @@ class Game {
   }
   destroy() {
     this.config.set('initialized', false);
-    this.canvas = null;
-    this.data = null;
-    this.stage = null;
     this.stop();
   }
 }

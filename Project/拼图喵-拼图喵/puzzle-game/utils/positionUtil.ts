@@ -1,6 +1,8 @@
 // 拆分大格子成小格子
-export const divideRect = (rowCount: number, colCount: number, puzzleWidth: number, puzzleHeight: number) => {
-  const items = [];
+export type Rect = { x: number, y: number, width: number, height: number };
+export type DivideRect = Rect & { row: number, col: number };
+export const divideRect = (rowCount: number, colCount: number, puzzleWidth: number, puzzleHeight: number): DivideRect[] => {
+  const items: DivideRect[] = [];
 
   const itemWidth = puzzleWidth / colCount;
   const itemHeight = puzzleHeight / rowCount;

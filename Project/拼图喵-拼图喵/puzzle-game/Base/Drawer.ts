@@ -1,11 +1,10 @@
 import Game from "../Game";
-import CanvasOM from "../Source/CanvasOM";
 
 /**
  * 绘制器
  */
 class Drawer {
-  game: Game = null;
+  game: Game;
 
   constructor(game: Game) {
     this.game = game;

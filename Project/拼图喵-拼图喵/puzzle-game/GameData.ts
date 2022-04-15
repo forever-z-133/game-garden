@@ -6,7 +6,6 @@ export interface GameDataConfig {
   colCount: number;
   rotatable: boolean;
 }
-
 class GameData implements GameDataConfig {
   rowCount: number = 2;
   colCount: number = 2;
@@ -16,7 +15,7 @@ class GameData implements GameDataConfig {
 
   constructor(config: Partial<GameDataConfig> = {}) {
     Object.keys(config).forEach(key => {
-      this[key] = config[key];
+      this.set(key as any, (config as any)[key]);
     });
     if (this.rowCount < 1) {
       throw new Error('GameData 中 rowCount 不可小于 1');
@@ -25,8 +24,9 @@ class GameData implements GameDataConfig {
       throw new Error('GameData 中 colCount 不可小于 1');
     }
   }
-  set(key: keyof GameDataConfig, value: any) {
-    this[key as string] = value;
+
+  set: classSet<GameDataConfig> = (key, value) => {
+    (this as GameDataConfig)[key] = value;
   }
 }
 export default GameData;

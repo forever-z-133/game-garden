@@ -11,8 +11,8 @@ const requestAnimationFrame = (func: Function) => {
  */
 class Updater {
   interval: number = 60;
-  timer: any = null;
-  drawer: Drawer = null;
+  timer: any;
+  drawer: Drawer;
   _time: number = 0;
   _pause: boolean = true;
 
