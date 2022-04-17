@@ -5,6 +5,9 @@
       :style="{width: `${canvasWidth}px`, height: `${canvasHeight}px`}"
       canvas-id="gameCanvas"
       id="gameCanvas"
+      @touchstart="onTouchStart"
+      @touchmove="onTouchMove"
+      @touchend="onTouchEnd"
     />
     <canvas
       class="canvas temp-canvas"
@@ -40,7 +43,7 @@ const game: Game = new Game({
 
 const options: GameDataConfig = {
   rowCount: 2,
-  colCount: 1,
+  colCount: 2,
   rotatable: false,
 };
 const sources: SourcesConfig = {
@@ -55,6 +58,12 @@ const sources: SourcesConfig = {
     }
   ],
 };
+
+const {
+  onTouchStart,
+  onTouchMove,
+  onTouchEnd,
+} = game.initEvent();
 
 const startGame = async () => {
   if (!ctx) return;

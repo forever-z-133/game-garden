@@ -29,7 +29,6 @@ const loadImageInH5 = (image: ImageSourceConfig): Promise<LoadedImageData> => {
     const img = new Image();
     img.onload = () => {
       const { src, width, height } = img;
-      console.log(src, width, height);
       resolve({ ...image, src, width, height });
     }
     img.onerror = reject;
