@@ -1,3 +1,4 @@
+import Animation from "../Animation/Animation";
 import PuzzleItem from "../Element/components/PuzzleItem";
 import Game from "../Game";
 import { expandRect, Point, pointInRect, rectInRect } from "../utils/positionUtil";
@@ -83,7 +84,21 @@ class EventControl implements EventMap {
       const rect = { x, y, width, height };
       const inner = rectInRect(rect, expandRect(answer, 16));
       if (inner) {
-        this._triggerItem.setCorrect();
+        const item = this._triggerItem;
+        item.correct = true;
+        const anim = new Animation(rect, answer, 300, {
+          onProgress: (data: any) => {
+            const { x, y, width, height } = data;
+            item.x = x;
+            item.y = y;
+            item.width = width;
+            item.height = height;
+          },
+          onFinish: () => {
+            item.chosen = false;
+          }
+        });
+        this.game.animation.add(anim);
         this._triggerItem = undefined;
       }
     }

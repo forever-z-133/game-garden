@@ -13,10 +13,15 @@ class Drawer {
   draw(now: number) {
     if (!this.game.canvas) return;
     const { canvasWidth, canvasHeight } = this.game.config;
+    const animation = this.game.animation;
     const ctx = this.game.canvas.ctx;
     const stage = this.game.stage;
     const { background, container, items } = stage;
     // ctx.globalCompositeOperation = 'destination-over';
+
+    animation.list.forEach(item => {
+      item.update(now);
+    });
 
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 

@@ -48,16 +48,6 @@ class PuzzleItem implements BaseElement {
       ctx.strokeRect(offsetX, offsetY, offsetWidth, offsetHeight);
     }
   }
-
-  setCorrect() {
-    const { x, y, width, height } = this.answer;
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-    this.correct = true;
-    this.chosen = false;
-  }
 }
 export default PuzzleItem;
 

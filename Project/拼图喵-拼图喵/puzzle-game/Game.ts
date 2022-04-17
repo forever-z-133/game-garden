@@ -10,6 +10,7 @@ import CanvasOM from "./Source/CanvasOM";
 import PuzzleContainer from "./Element/components/PuzzleContainer";
 import EventControl, { EventMap } from "./Event/EventControl";
 import IdleContainer from "./Element/components/IdleContainer";
+import AnimationControl from "./Animation/AnimationControl";
 
 /**
  * 游戏主程序
@@ -22,12 +23,14 @@ class Game {
   canvas!: CanvasOM;
   stage!: Stage;
   event!: EventControl;
+  animation!: AnimationControl;
   success: boolean = false;
 
   constructor(config: Partial<GameConfig> = {}) {
     this.config = new Config(config);
     this.drawer = new Drawer(this);
     this.timer = new Updater(this.drawer);
+    this.animation = new AnimationControl();
   }
 
   initEvent(customEvnets: Partial<EventMap> = {}): EventMap {
