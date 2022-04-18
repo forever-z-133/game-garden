@@ -37,12 +37,12 @@ class PuzzleItem implements BaseElement {
     ctx.drawImage(src, clipX, clipY, clipWidth, clipHeight, offsetX, offsetY, offsetWidth, offsetHeight);
     if (this.correct) {
     } else if (this.chosen) {
-      const borderWidth = 4;
+      const borderWidth = 2;
       ctx.setStrokeStyle('pink');
       ctx.setLineWidth(borderWidth);
       ctx.strokeRect(offsetX, offsetY, offsetWidth, offsetHeight);
     } else {
-      const borderWidth = 2;
+      const borderWidth = 1;
       ctx.setStrokeStyle('#999');
       ctx.setLineWidth(borderWidth);
       ctx.strokeRect(offsetX, offsetY, offsetWidth, offsetHeight);

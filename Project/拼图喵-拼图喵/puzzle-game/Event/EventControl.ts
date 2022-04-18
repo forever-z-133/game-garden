@@ -38,14 +38,21 @@ class EventControl implements EventMap {
     // 找到 [点中&未正确] 的格子进行选中
     this._triggerItem = undefined;
     const matcher: PuzzleItem[] = [];
-    this.game.stage.items.forEach((item) => {
+    items.forEach((item) => {
       const inner = pointInRect(point, item);
       item.chosen = false;
       inner && !item.correct && matcher.push(item);
     });
+
     if (matcher && matcher.length) {
-      this._triggerItem = matcher.pop() as PuzzleItem;
-      this._triggerItem.chosen = true;
+      const item = matcher.pop() as PuzzleItem;
+      this._triggerItem = item;
+      // 标记选中
+      item.chosen = true;
+      // 调整 z-index 层级
+      const index = items.findIndex(e => e.index === item.index);
+      this.game.stage.items.splice(index, 1);
+      this.game.stage.items.push(item);
     }
   }
   onTouchMove = (e: any) => {
@@ -80,6 +87,7 @@ class EventControl implements EventMap {
 
     // 拖完放置元素时，判断选中元素是否正确
     if (this._triggerItem) {
+      this._triggerItem.chosen = false;
       const { x, y, width, height, answer } = this._triggerItem;
       const rect = { x, y, width, height };
       const inner = rectInRect(rect, expandRect(answer, 16));
@@ -96,6 +104,9 @@ class EventControl implements EventMap {
           },
           onFinish: () => {
             item.chosen = false;
+            const index = items.findIndex(e => e.index === item.index);
+            this.game.stage.items.splice(index, 1);
+            this.game.stage.items.unshift(item);
           }
         });
         this.game.animation.add(anim);

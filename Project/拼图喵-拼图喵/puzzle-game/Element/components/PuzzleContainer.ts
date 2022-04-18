@@ -20,9 +20,9 @@ class PuzzleContainer implements BaseElement {
     this.game = game;
 
     const { canvasWidth, canvasHeight } = this.game.config;
-    const rectWidth = Math.min(canvasWidth, canvasHeight) * 0.9;
+    const rectWidth = Math.min(canvasWidth, canvasHeight) * 0.95;
     this.x = (canvasWidth - rectWidth) / 2;
-    this.y = this.x;
+    this.y = canvasHeight / 2 - rectWidth / 2 + 50;
     this.width = rectWidth;
     this.height = rectWidth;
   }
@@ -61,17 +61,11 @@ class PuzzleContainer implements BaseElement {
   }
 
   random(items: PuzzleItem[]) {
+    const { canvasWidth, canvasHeight } = this.game.config;
     const { width: itemWidth, height: itemHeight } = items[0];
-    const { x: wrapperX, y: wrapperY, width: wrapperWidth, height: wrapperHeight } = this.game.stage.idle;
-    const scaleData: ScaleData = getScaleData(itemWidth, itemHeight, wrapperWidth * 0.8, wrapperHeight * 0.8, 'contain');
-    const { scale, width: compressWidth, height: compressHeight } = scaleData;
     items.forEach(item => {
-      const { x, y, width, height } = item;
-      item.idleState = { scale, x, y, width, height };
-      item.x = randomPosition(wrapperX, wrapperX + wrapperWidth, compressWidth);
-      item.y = randomPosition(wrapperY, wrapperY + wrapperHeight, compressHeight);
-      item.width = compressWidth;
-      item.height = compressHeight;
+      item.x = randomPosition(0, canvasWidth, itemWidth);
+      item.y = randomPosition(0, canvasHeight, itemHeight);
     });
   }
 

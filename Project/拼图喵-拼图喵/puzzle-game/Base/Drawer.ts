@@ -16,7 +16,7 @@ class Drawer {
     const animation = this.game.animation;
     const ctx = this.game.canvas.ctx;
     const stage = this.game.stage;
-    const { background, container, items } = stage;
+    const { background, container, idle, items } = stage;
     // ctx.globalCompositeOperation = 'destination-over';
 
     animation.list.forEach(item => {
@@ -29,6 +29,8 @@ class Drawer {
     background.draw(ctx);
 
     container.draw(ctx);
+
+    idle.draw(ctx);
 
     items.forEach(item => item.update(now));
     items.forEach(item => item.draw(ctx));

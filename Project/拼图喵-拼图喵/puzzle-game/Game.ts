@@ -53,12 +53,12 @@ class Game {
     this.stage.addElement('background', background);
     const container: PuzzleContainer = new PuzzleContainer(this);
     this.stage.addElement('container', container);
-    const idle: IdleContainer = new IdleContainer(this);
+    const idle: IdleContainer = new IdleContainer(this, sourceImage);
     this.stage.addElement('idle', idle);
     const items: PuzzleItem[] = container.createItems(sourceImage);
     this.stage.addElement('items', items);
 
-    // container.random(items);
+    container.random(items);
 
     this.config.set('initialized', true);
   }

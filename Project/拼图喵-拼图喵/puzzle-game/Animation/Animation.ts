@@ -39,7 +39,6 @@ class Animation {
       const v1 = this.start[key];
       const v2 = this.end[key];
       const val = this._update(v1, v2, progress);
-      if (key === 'x') console.log(v1, v2, progress);
       if (val !== undefined && !isNaN(val)) {
         result[key] = val;
       }

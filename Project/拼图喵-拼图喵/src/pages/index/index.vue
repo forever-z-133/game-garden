@@ -1,5 +1,5 @@
 <template>
-  <div class="game-container">
+  <view class="game-container">
     <canvas
       class="canvas game-canvas"
       :style="{width: `${canvasWidth}px`, height: `${canvasHeight}px`}"
@@ -9,19 +9,34 @@
       @touchmove="onTouchMove"
       @touchend="onTouchEnd"
     />
-    <canvas
-      class="canvas temp-canvas"
-      canvas-id="tempCanvas"
-      id="tempCanvas"
-    />
-    <button @click="pauseGame">暂停</button>
-    <button @click="resumeGame">恢复</button>
-  </div>
+    <button class="btn btn-custom" @click="openCustomSettings">自定义游戏</button>
+    <view
+      class="modal custom-setting-modal"
+      :class="{ visible: customSettingVisible }"
+    >
+      <view class="modal-mask" @click="closeCustomSettings"></view>
+      <view class="modal-container">
+        <FormItem label="图片">111</FormItem>
+        <FormItem label="行数">
+          <slider min="1" max="9" block-size="12" />
+        </FormItem>
+        <FormItem label="列数">
+          <slider min="1" max="9" block-size="12" />
+        </FormItem>
+        <FormItem label="是否可旋转">444</FormItem>
+        <view class="buttons">
+          <button class="btn btn-cancel">取消</button>
+          <button class="btn btn-submit">确定</button>
+        </view>
+      </view>
+    </view>
+  </view>
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue';
-import { SourcesConfig } from '../../../puzzle-game/Base/SourceLoader';
+import FormItem from '../../components/FormItem.vue';
+import { ref, reactive, onMounted, onUnmounted } from 'vue';
+import { LoadedImageData, SourcesConfig } from '../../../puzzle-game/Base/SourceLoader';
 import Game from '../../../puzzle-game/Game';
 import { GameDataConfig } from '../../../puzzle-game/GameData';
 import { initCanvas } from '../../utils/initCanvas';
@@ -50,7 +65,7 @@ const sources: SourcesConfig = {
   images: [
     {
       id: 'background',
-      src: 'https://images.996pic.com/281821367c3246e6885715a9480c801b680_680.jpg'
+      src: 'http://www.51pptmoban.com/d/file/2019/01/02/99bf843b61dc5592e097bee522cdb28d.jpg'
     },
     {
       id: 'puzzle-source',
@@ -73,12 +88,19 @@ const startGame = async () => {
   }, 200);
 }
 
-const pauseGame = () => {
-  game.pause();
+const customSettingVisible = ref(false);
+const openCustomSettings = () => {
+  customSettingVisible.value = true;
 }
-const resumeGame = () => {
-  game.resume();
+const closeCustomSettings = () => {
+  customSettingVisible.value = false;
 }
+
+const customSettingFormData = reactive<GameDataConfig & { source?: LoadedImageData }>({
+  rowCount: 2,
+  colCount: 2,
+  rotatable: false,
+});
 
 onMounted(async () => {
   for (let i = 0; i < sources.images.length; i++) {
@@ -95,8 +117,12 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss">
+@import '../../uni.scss';
 .canvas {
   display: block;
+}
+.modal {
+  @include modal();
 }
 .game-container {
   position: absolute;
@@ -105,11 +131,19 @@ onUnmounted(() => {
   right: 0;
   bottom: 0;
   overflow: hidden;
-  .temp-canvas {
+  .btn-custom {
     position: absolute;
-    left: -9999px;
-    width: 1980px;
-    height: 1980px;
+    top: 10rpx;
+    left: 10rpx;
+  }
+  .custom-setting-modal {
+    .modal-container {
+      margin: 80rpx auto;
+      width: 600rpx;
+      height: 80%;
+      background-color: #fff;
+      border-radius: 10rpx;
+    }
   }
 }
 </style>
