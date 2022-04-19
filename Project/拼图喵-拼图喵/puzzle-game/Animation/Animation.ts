@@ -1,16 +1,18 @@
+import * as easing from '../utils/easingUtil';
+
 /**
  * 动画类
  */
 type MoreOption = {
-  easing?: any,
+  easing?: string,
   onProgress?: (result: any, progress: number) => void,
   onFinish?: () => void,
 };
 class Animation {
   start: any = {};
   end: any = {};
-  duration: number = 1000;
-  easing: any;
+  duration: number;
+  easing?: string;
   onProgress?: (result: any, progress: number) => void;
   onFinish?: () => void;
   _time: number = 0;
@@ -31,14 +33,16 @@ class Animation {
   }
 
   update(now: number): void {
-    const progress = (now - this._time) / this.duration;
+    const t = now - this._time;
+    const d = this.duration;
+    const progress = t / d;
 
     const result: any = {};
     Object.keys(this.end).forEach(key => {
       if (!this.start.hasOwnProperty(key)) return;
       const v1 = this.start[key];
       const v2 = this.end[key];
-      const val = this._update(v1, v2, progress);
+      const val = this._update(t, v1, v2 - v1, d);
       if (val !== undefined && !isNaN(val)) {
         result[key] = val;
       }
@@ -52,8 +56,19 @@ class Animation {
     }
   }
 
-  _update(v1: any, v2: any, progress: number): any {
-    return (v2 - v1) * progress + v1;
+  /**
+   * 刷新数据
+   * @param t 已经历的时间
+   * @param b 起始量
+   * @param c 目标运动量
+   * @param d 完成动画的总时间
+   * @returns 该事件对应的数据
+   */
+  _update(t: number, b: any, c: any, d: number): any {
+    if (this.easing && (this.easing in easing)) {
+      return (easing as any)[this.easing](t, b, c, d);
+    }
+    return easing.easeLinear(t, b, c, d);
   }
 
   done() {

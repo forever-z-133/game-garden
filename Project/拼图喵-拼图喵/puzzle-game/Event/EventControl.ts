@@ -107,18 +107,18 @@ class EventControl implements EventMap {
             const index = items.findIndex(e => e.index === item.index);
             this.game.stage.items.splice(index, 1);
             this.game.stage.items.unshift(item);
+
+            // 每次放置判断是否游戏结束
+            const isAllRight = items.every(item => item.correct);
+            if (isAllRight && !this.game.success) {
+              this.game.event.disable = true;
+              this.game.gameSuccess();
+            }
           }
         });
         this.game.animation.add(anim);
         this._triggerItem = undefined;
       }
-    }
-
-    // 每次放置判断是否游戏结束
-    const isAllRight = items.every(item => item.correct);
-    if (isAllRight && !this.game.success) {
-      this.game.event.disable = true;
-      this.game.gameSuccess();
     }
   }
 

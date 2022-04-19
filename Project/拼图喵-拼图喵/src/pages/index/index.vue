@@ -9,7 +9,7 @@
       @touchmove="onTouchMove"
       @touchend="onTouchEnd"
     />
-    <button class="btn btn-custom" @click="openCustomSettings">自定义游戏</button>
+    <!-- <button class="btn btn-custom" @click="openCustomSettings">自定义游戏</button> -->
     <view
       class="modal custom-setting-modal"
       :class="{ visible: customSettingVisible }"
@@ -65,11 +65,11 @@ const sources: SourcesConfig = {
   images: [
     {
       id: 'background',
-      src: 'http://www.51pptmoban.com/d/file/2019/01/02/99bf843b61dc5592e097bee522cdb28d.jpg'
+      src: 'https://image-1304214004.file.myqcloud.com/2b8f621e9244cea5007bac8f5d50e476/9abd0940-3fd9-47b6-a1c5-5c3ab4e64ad199bf843b61dc5592e097bee522cdb28d.jpg'
     },
     {
       id: 'puzzle-source',
-      src: 'https://images.996pic.com/683dc278306d410785ccde558e081e96680_680.jpg'
+      src: 'https://image-1304214004.file.myqcloud.com/2b8f621e9244cea5007bac8f5d50e476/8834b897-5c50-44f8-921f-dccc9c2df9ab683dc278306d410785ccde558e081e96680_680.jpg'
     }
   ],
 };

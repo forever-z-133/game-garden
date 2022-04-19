@@ -48,7 +48,7 @@ export const randomPosition = (left: number, right: number, size: number): numbe
 // 判断点是否处于方块内部
 export const pointInRect = (point: Point, rect: Rect): boolean => {
   const outer = point.x < rect.x || point.y < rect.y || point.x > (rect.x + rect.width) || point.y > (rect.y + rect.height);
-  return !outer; 
+  return !outer;
 }
 
 // 判断方块是否处于方块内部
@@ -57,5 +57,5 @@ export const rectInRect = (rect: Rect, bigRect: Rect): boolean => {
   const right = rect.x + rect.width < bigRect.x + bigRect.width;
   const top = rect.y > bigRect.y;
   const bottom = rect.y + rect.height < bigRect.y + bigRect.height;
-  return left && right && top && bottom; 
+  return left && right && top && bottom;
 }
