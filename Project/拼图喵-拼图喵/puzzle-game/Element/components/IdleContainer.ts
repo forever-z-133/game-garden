@@ -40,6 +40,8 @@ class IdleContainer implements BaseElement {
   draw(ctx: UniApp.CanvasContext) {
     const { x, y, width, height } = this;
     const { src, clipX, clipY, clipWidth, clipHeight } = this.sprite;
+    ctx.setFillStyle('white');
+    ctx.fillRect(x, y, width, height);
     ctx.drawImage(src, clipX, clipY, clipWidth, clipHeight, x, y, width, height);
   }
 }

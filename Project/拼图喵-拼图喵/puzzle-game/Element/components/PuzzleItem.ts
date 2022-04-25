@@ -34,6 +34,8 @@ class PuzzleItem implements BaseElement {
   draw(ctx: UniApp.CanvasContext): void {
     const { x: offsetX, y: offsetY, width: offsetWidth, height: offsetHeight } = this;
     const { src, clipX, clipY, clipWidth, clipHeight } = this.image;
+    ctx.setFillStyle('white');
+    ctx.fillRect(offsetX, offsetY, offsetWidth, offsetHeight);
     ctx.drawImage(src, clipX, clipY, clipWidth, clipHeight, offsetX, offsetY, offsetWidth, offsetHeight);
     if (this.correct) {
     } else if (this.chosen) {
